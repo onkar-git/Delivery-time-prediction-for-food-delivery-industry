@@ -2,7 +2,8 @@ from Deliveryprediction.constants import *
 from Deliveryprediction.utils.common import read_yaml, create_directories
 from Deliveryprediction.entity.config_entity import (DataIngestionConfig,
                                                      DataValidationConfig,
-                                                     DataCleaningConfig)
+                                                     DataCleaningConfig,
+                                                     DataPreparationConfig)
 
 
 class ConfigurationManager:
@@ -60,3 +61,20 @@ class ConfigurationManager:
            )
 
         return data_cleaning_config
+
+
+    def get_data_preparation_config(self) -> DataPreparationConfig:
+            config = self.config.data_preparation
+            params = self.params.PARAMS
+
+            create_directories([config.root_dir])
+
+            data_Preparation_config = DataPreparationConfig(
+                root_dir = config.root_dir,
+                data_input_dir = config.data_input_dir,
+                train_dir = config.train_dir,
+                test_dir = config.test_dir,
+                params = params    
+            )
+
+            return data_Preparation_config

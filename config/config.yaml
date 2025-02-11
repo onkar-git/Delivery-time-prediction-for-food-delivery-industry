@@ -21,5 +21,6 @@ data_cleaning:
 data_preparation:
   root_dir: artifacts/data_preparation
   data_input_dir: artifacts/data_cleaning/swiggy_cleaned.csv
-  train_dir: artifacts/data_preparation/train.csv
-  test_dir: artifacts/data_preparation/test.csv
+  train_dir: artifacts/data_preparation/
+  test_dir: artifacts/data_preparation/
+
