@@ -7,3 +7,16 @@ stages:
   
     outs:
     - artifacts\data_cleaning\swiggy_cleaned.csv
+
+  data_preparation:
+    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    params:
+    - PARAMS.test_size
+    - PARAMS.random_state
+    deps:
+    - artifacts\data_cleaning\swiggy_cleaned.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\src\Deliveryprediction\components\step_4_data_preparation.py
+    outs:
+    - artifacts\data_preparation\train.csv
+    - artifacts\data_preparation\test.csv
+    
