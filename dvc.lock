@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  data_cleaning:
+    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    deps:
+    - path: artifacts\data_ingestion\swiggy.csv
+      hash: md5
+      md5: 0b050b37dfe6cfbfaa18d7cb4e454377
+      size: 7772212
+    - path: src\Deliveryprediction\components\_3_data_cleaning.py
+      hash: md5
+      md5: d5a15781428283172f1def8392a0939a
+      size: 9998
+    outs:
+    - path: artifacts\data_cleaning\swiggy_cleaned.csv
+      hash: md5
+      md5: f8c60641d9cd7e3e6bf30c1494ad6df7
+      size: 3851746
