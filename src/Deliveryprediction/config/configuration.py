@@ -4,7 +4,8 @@ from Deliveryprediction.entity.config_entity import (DataIngestionConfig,
                                                      DataValidationConfig,
                                                      DataCleaningConfig,
                                                      DataPreparationConfig,
-                                                     DataTransformerConfig)
+                                                     DataTransformerConfig,
+                                                     ModelTrainerConfig)
 
 
 class ConfigurationManager:
@@ -94,3 +95,39 @@ class ConfigurationManager:
         )
 
         return data_Transformation_config
+    
+
+    def get_model_gbm_config(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer
+        params = self.params.LightGBM
+        params_2 = self.params.Random_Forest
+        #schema = self.schema.TARGATE_COLUMN
+
+        create_directories([config.root_dir])
+
+        model_trainer_config_lgm = ModelTrainerConfig(
+            root_dir = config.root_dir,
+            data_input_dir = config.data_input_dir,
+            train_data_path = config.train_data_path,
+            test_data_path= config.test_data_path,
+            model_name = config.model_name,
+            n_estimators = params.n_estimators,
+            max_depth = params.max_depth,
+            learning_rate = params.learning_rate,
+            subsample = params.subsample,
+            min_child_weight = params.min_child_weight,
+            min_split_gain = params.min_split_gain,
+            reg_lambda = params.reg_lambda,
+            n_jobs = params.n_jobs,
+            criterion_rf = params_2.criterion,
+            max_depth_rf = params_2.max_depth,
+            n_estimators_rf = params_2.n_estimators,
+            max_features_rf = params_2.max_features,
+            min_samples_split_rf = params_2.min_samples_split,
+            min_samples_leaf_rf = params_2.min_samples_leaf,
+            max_samples_rf = params_2.max_samples,
+            verbose_rf = params_2.verbose,
+            n_jobs_rf = params_2.n_jobs,
+            )
+
+        return model_trainer_config_lgm

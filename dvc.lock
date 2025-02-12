@@ -64,3 +64,48 @@ stages:
       hash: md5
       md5: 8c43983e0b925ac07685c1162d9d8fd8
       size: 4063875
+  model_train:
+    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    deps:
+    - path: artifacts\data_trans\train_trans.csv
+      hash: md5
+      md5: 8c43983e0b925ac07685c1162d9d8fd8
+      size: 4063875
+    - path: src\Deliveryprediction\components\step_6_model_training.py
+      hash: md5
+      md5: 4eb4fc737535b91dc71c3eaa2ce78ca0
+      size: 4956
+    params:
+      params.yaml:
+        LightGBM:
+          n_estimators: 154
+          max_depth: 27
+          learning_rate: 0.22234435854395157
+          subsample: 0.7592213724048168
+          min_child_weight: 20
+          min_split_gain: 0.004604680609280751
+          reg_lambda: 97.81002379097947
+          n_jobs: -1
+        Random_Forest:
+          n_estimators: 479
+          criterion: squared_error
+          max_depth: 17
+          max_features: 1
+          min_samples_split: 9
+          min_samples_leaf: 2
+          max_samples: 0.6603673526197066
+          verbose: 1
+          n_jobs: -1
+    outs:
+    - path: artifacts\model_trainer\models\model.joblib
+      hash: md5
+      md5: 3828fa1118c121a5cfc938ebeb143eb3
+      size: 149396216
+    - path: artifacts\model_trainer\models\power_transformer.joblib
+      hash: md5
+      md5: ced8006bcf447899d2f86eee462bd652
+      size: 837
+    - path: artifacts\model_trainer\models\stacking_regressor.joblib
+      hash: md5
+      md5: 34aa2ee5536c58bf033b29c768ec641e
+      size: 149384666

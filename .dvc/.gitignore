@@ -1,3 +1,4 @@
 /config.local
 /tmp
 /cache
+/artifacts/model_trainer/models/*.joblib

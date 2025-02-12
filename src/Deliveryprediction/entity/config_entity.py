@@ -38,3 +38,27 @@ class DataTransformerConfig:
     data_input_dir: Path
     data_tran_dir: Path
 
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir: Path
+    data_input_dir: Path
+    train_data_path: Path
+    test_data_path: Path
+    model_name: str
+    n_estimators: int
+    max_depth: int
+    learning_rate: float
+    subsample: float
+    min_child_weight: int
+    min_split_gain: float
+    reg_lambda: float
+    n_jobs: int
+    n_estimators_rf: int
+    max_depth_rf: int
+    criterion_rf: str
+    max_features_rf: int
+    min_samples_split_rf: int
+    min_samples_leaf_rf: int
+    max_samples_rf: float
+    verbose_rf: int
+    n_jobs_rf: int

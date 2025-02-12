@@ -1,2 +1,3 @@
 /test_trans.csv
 /train_trans.csv
+artifacts/model_trainer/models/*.joblib

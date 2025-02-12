@@ -169,3 +169,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+/artifact/models/model.joblib
+/artifact/models/power_transformer.joblib
+/artifact/models/stacking_regressor.joblib
+# Ignore large model files
+artifacts/model_trainer/models/*.joblib
+artifacts/model_trainer/models/

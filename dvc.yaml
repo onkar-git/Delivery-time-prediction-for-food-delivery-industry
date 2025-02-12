@@ -30,3 +30,17 @@ stages:
     - artifacts\data_trans\train_trans.csv
     - artifacts\data_trans\models\preprocessor.joblib
     
+  model_train:
+   cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+   deps:
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\src\Deliveryprediction\components\step_6_model_training.py
+    - artifacts\data_trans\train_trans.csv
+   params:
+    - Random_Forest
+    - LightGBM
+   outs:
+    - artifacts\model_trainer\models\model.joblib
+    - artifacts\model_trainer\models\power_transformer.joblib
+    - artifacts\model_trainer\models\stacking_regressor.joblib
+
+  
