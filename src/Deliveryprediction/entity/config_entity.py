@@ -30,3 +30,11 @@ class DataPreparationConfig:
     train_dir: Path
     test_dir: Path
     params : dict
+
+
+@dataclass(frozen=True)
+class DataTransformerConfig:
+    root_dir: Path
+    data_input_dir: Path
+    data_tran_dir: Path
+

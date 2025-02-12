@@ -4,6 +4,7 @@ from Deliveryprediction.pipeline.stage_01_data_ingetion import DataIngestionTrai
 from Deliveryprediction.pipeline.stage_02_data_validation import DataValidationTrainingPipeline
 from Deliveryprediction.pipeline.stage_03_data_cleaning import DataCleaningPipeline
 from Deliveryprediction.pipeline.stage_04_data_preparation import DataPreparationTrainingPipeline
+from Deliveryprediction.pipeline.stage_05_data_transformation import DataTransformerTrainingPipeline
 from pathlib import Path
 
 STAGE_NAME = "Data Ingestion Stage"
@@ -51,6 +52,17 @@ try:
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
    data_preparation = DataPreparationTrainingPipeline()
    data_preparation.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
+
+STAGE_NAME = "Data Transformation Stage"
+
+try:
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+   data_Transformation = DataTransformerTrainingPipeline()
+   data_Transformation.main()
    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
         logger.exception(e)

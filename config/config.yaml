@@ -24,3 +24,8 @@ data_preparation:
   train_dir: artifacts/data_preparation/
   test_dir: artifacts/data_preparation/
 
+data_transformation:
+  root_dir: artifacts/data_trans/
+  data_input_dir: artifacts/data_preparation/
+  data_tran_dir: artifacts/data_trans/
+  

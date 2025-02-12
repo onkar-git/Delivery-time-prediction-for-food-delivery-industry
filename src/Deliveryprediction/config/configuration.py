@@ -3,7 +3,8 @@ from Deliveryprediction.utils.common import read_yaml, create_directories
 from Deliveryprediction.entity.config_entity import (DataIngestionConfig,
                                                      DataValidationConfig,
                                                      DataCleaningConfig,
-                                                     DataPreparationConfig)
+                                                     DataPreparationConfig,
+                                                     DataTransformerConfig)
 
 
 class ConfigurationManager:
@@ -78,3 +79,18 @@ class ConfigurationManager:
             )
 
             return data_Preparation_config
+    
+
+    def get_data_trans_config(self) -> DataTransformerConfig:
+        config = self.config.data_transformation
+        
+
+        create_directories([config.root_dir])
+
+        data_Transformation_config = DataTransformerConfig(
+            root_dir = config.root_dir,
+            data_input_dir = config.data_input_dir,
+            data_tran_dir = config.data_tran_dir
+        )
+
+        return data_Transformation_config

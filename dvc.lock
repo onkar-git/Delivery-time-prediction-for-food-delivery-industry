@@ -40,3 +40,27 @@ stages:
       hash: md5
       md5: 8c76f5d21e065dc82670efd10853e397
       size: 2886772
+  data_transformation:
+    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    deps:
+    - path: artifacts\data_cleaning\swiggy_cleaned.csv
+      hash: md5
+      md5: f8c60641d9cd7e3e6bf30c1494ad6df7
+      size: 3851746
+    - path: src\Deliveryprediction\components\step_5_data_transformation.py
+      hash: md5
+      md5: 5485baf8092dc0e52c0f560667d00b7d
+      size: 5142
+    outs:
+    - path: artifacts\data_trans\models\preprocessor.joblib
+      hash: md5
+      md5: c4e41b72581d8801232af608fcdba23e
+      size: 8493
+    - path: artifacts\data_trans\test_trans.csv
+      hash: md5
+      md5: 9662a890b32e04f6679b3c3c372e6744
+      size: 1354858
+    - path: artifacts\data_trans\train_trans.csv
+      hash: md5
+      md5: 8c43983e0b925ac07685c1162d9d8fd8
+      size: 4063875
