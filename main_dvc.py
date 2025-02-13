@@ -8,6 +8,9 @@ from Deliveryprediction.components._3_data_cleaning import DataCleaning
 from Deliveryprediction.components.step_4_data_preparation import DataPreparation
 from Deliveryprediction.components.step_5_data_transformation import DataTransformation
 from Deliveryprediction.components.step_6_model_training import ModelTrainer 
+
+
+
 try:
     logger.info("Data cleaning tracking with DVC manager")
     with open(Path("E://projects//Delivery-time-prediction-for-food-devlivery-industry//artifacts//data_validation//status.txt"), "r") as f:
