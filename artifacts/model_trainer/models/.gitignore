@@ -1,0 +1,6 @@
+/model.joblib
+/power_transformer.joblib
+/stacking_regressor.joblib
+
+artifacts/model_trainer/models/*.joblib
+artifacts/model_trainer/models/
