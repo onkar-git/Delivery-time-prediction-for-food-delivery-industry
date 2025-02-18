@@ -1,32 +1,34 @@
 schema: '2.0'
 stages:
   data_cleaning:
-    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\main_dvc.py
     deps:
     - path: artifacts\data_ingestion\swiggy.csv
       hash: md5
       md5: 0b050b37dfe6cfbfaa18d7cb4e454377
       size: 7772212
-    - path: src\Deliveryprediction\components\_3_data_cleaning.py
+    - path: dvc_main\main_dvc.py
       hash: md5
-      md5: d5a15781428283172f1def8392a0939a
-      size: 9998
+      md5: 39163cc862a6fc47f7390b3262e0ff4c
+      size: 3260
     outs:
     - path: artifacts\data_cleaning\swiggy_cleaned.csv
       hash: md5
       md5: f8c60641d9cd7e3e6bf30c1494ad6df7
       size: 3851746
   data_preparation:
-    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_prep.py
     deps:
     - path: artifacts\data_cleaning\swiggy_cleaned.csv
       hash: md5
       md5: f8c60641d9cd7e3e6bf30c1494ad6df7
       size: 3851746
-    - path: src\Deliveryprediction\components\step_4_data_preparation.py
+    - path: dvc_main\data_prep.py
       hash: md5
-      md5: 150e6ddf43ab6f91cf3a3e7809aa89ac
-      size: 1126
+      md5: 8d3351c69f0667894480ec754c59e00c
+      size: 1347
     params:
       params.yaml:
         PARAMS.random_state: 42
@@ -41,16 +43,17 @@ stages:
       md5: 8c76f5d21e065dc82670efd10853e397
       size: 2886772
   data_transformation:
-    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_transf.py
     deps:
     - path: artifacts\data_cleaning\swiggy_cleaned.csv
       hash: md5
       md5: f8c60641d9cd7e3e6bf30c1494ad6df7
       size: 3851746
-    - path: src\Deliveryprediction\components\step_5_data_transformation.py
+    - path: dvc_main\data_transf.py
       hash: md5
-      md5: 5485baf8092dc0e52c0f560667d00b7d
-      size: 5142
+      md5: ce0380eb830d60fc745c6f5ab21df169
+      size: 1092
     outs:
     - path: artifacts\data_trans\models\preprocessor.joblib
       hash: md5
@@ -65,16 +68,17 @@ stages:
       md5: 8c43983e0b925ac07685c1162d9d8fd8
       size: 4063875
   model_train:
-    cmd: python E:/projects/Delivery-time-prediction-for-food-devlivery-industry/main_dvc.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_train.py
     deps:
     - path: artifacts\data_trans\train_trans.csv
       hash: md5
       md5: 8c43983e0b925ac07685c1162d9d8fd8
       size: 4063875
-    - path: src\Deliveryprediction\components\step_6_model_training.py
+    - path: dvc_main\model_train.py
       hash: md5
-      md5: 4eb4fc737535b91dc71c3eaa2ce78ca0
-      size: 4956
+      md5: 9728b1d64c4095b3154579f5a27473dd
+      size: 1073
     params:
       params.yaml:
         LightGBM:
@@ -99,13 +103,13 @@ stages:
     outs:
     - path: artifacts\model_trainer\models\model.joblib
       hash: md5
-      md5: 96e8ea425b0249119f039448e033044b
-      size: 148792568
+      md5: 86703b9e7bf494c2ffa3d6d059017123
+      size: 149229464
     - path: artifacts\model_trainer\models\power_transformer.joblib
       hash: md5
       md5: ced8006bcf447899d2f86eee462bd652
       size: 837
     - path: artifacts\model_trainer\models\stacking_regressor.joblib
       hash: md5
-      md5: fd4bacbd67423f9be61316f926708e5f
-      size: 148781018
+      md5: 39555d4a8d0ea0278e386c2bc19d4c82
+      size: 149217914

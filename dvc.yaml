@@ -1,46 +1,46 @@
 stages:
   data_cleaning:
-    cmd: python src/Deliveryprediction/dvc_pipeline/stage_03_data_cleaning.py
+    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\main_dvc.py
     deps:
-    - artifacts/data_ingestion/swiggy.csv
-    - src/Deliveryprediction/components/_3_data_cleaning.py
+    - artifacts\data_ingestion\swiggy.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\main_dvc.py
     outs:
-    - artifacts/data_cleaning/swiggy_cleaned.csv
+    - artifacts\data_cleaning\swiggy_cleaned.csv
     
 
-  # data_preparation:
-  #   cmd: python src\Deliveryprediction\dvc_pipeline\step_4_data_preparation.py
-  #   params:
-  #   - PARAMS.test_size
-  #   - PARAMS.random_state
-  #   deps:
-  #   - artifacts\data_cleaning\swiggy_cleaned.csv
-  #   - src\Deliveryprediction\dvc_pipeline\step_4_data_preparation.py
-  #   outs:
-  #   - artifacts\data_preparation\train.csv
-  #   - artifacts\data_preparation\test.csv
+  data_preparation:
+    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_prep.py
+    params:
+    - PARAMS.test_size
+    - PARAMS.random_state
+    deps:
+    - artifacts\data_cleaning\swiggy_cleaned.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_prep.py
+    outs:
+    - artifacts\data_preparation\train.csv
+    - artifacts\data_preparation\test.csv
 
-  # data_transformation:
-  #  cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\src\Deliveryprediction\components\step_5_data_transformation.py
-  #  deps:
-  #   - artifacts\data_cleaning\swiggy_cleaned.csv
-  #   - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\src\Deliveryprediction\components\step_5_data_transformation.py
-  #  outs:
-  #   - artifacts\data_trans\test_trans.csv
-  #   - artifacts\data_trans\train_trans.csv
-  #   - artifacts\data_trans\models\preprocessor.joblib
+  data_transformation:
+   cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_transf.py
+   deps:
+    - artifacts\data_cleaning\swiggy_cleaned.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_transf.py
+   outs:
+    - artifacts\data_trans\test_trans.csv
+    - artifacts\data_trans\train_trans.csv
+    - artifacts\data_trans\models\preprocessor.joblib
     
-  # model_train:
-  #  cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\src\Deliveryprediction\components\step_6_model_training.py
-  #  deps:
-  #   - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\src\Deliveryprediction\components\step_6_model_training.py
-  #   - artifacts\data_trans\train_trans.csv
-  #  params:
-  #   - Random_Forest
-  #   - LightGBM
-  #  outs:
-  #   - artifacts\model_trainer\models\model.joblib
-  #   - artifacts\model_trainer\models\power_transformer.joblib
-  #   - artifacts\model_trainer\models\stacking_regressor.joblib
+  model_train:
+   cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_train.py
+   deps:
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_train.py
+    - artifacts\data_trans\train_trans.csv
+   params:
+    - Random_Forest
+    - LightGBM
+   outs:
+    - artifacts\model_trainer\models\model.joblib
+    - artifacts\model_trainer\models\power_transformer.joblib
+    - artifacts\model_trainer\models\stacking_regressor.joblib
 
   
