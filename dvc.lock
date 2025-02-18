@@ -99,13 +99,13 @@ stages:
     outs:
     - path: artifacts\model_trainer\models\model.joblib
       hash: md5
-      md5: 86703b9e7bf494c2ffa3d6d059017123
-      size: 149229464
+      md5: ca5936dd8355670567fd467ec5aedbd6
+      size: 149515016
     - path: artifacts\model_trainer\models\power_transformer.joblib
       hash: md5
       md5: ced8006bcf447899d2f86eee462bd652
       size: 837
     - path: artifacts\model_trainer\models\stacking_regressor.joblib
       hash: md5
-      md5: 39555d4a8d0ea0278e386c2bc19d4c82
-      size: 149217914
+      md5: 5598cb4df6be58ee3e393e8e6f4c5f20
+      size: 149503466
