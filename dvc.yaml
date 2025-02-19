@@ -7,23 +7,23 @@ stages:
     outs:
     - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\data_cleaning\swiggy_cleaned.csv
     
-
   data_preparation:
     cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_prep.py
     params:
     - PARAMS.test_size
     - PARAMS.random_state
     deps:
-    - artifacts\data_cleaning\swiggy_cleaned.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\data_cleaning\swiggy_cleaned.csv
     - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_prep.py
     outs:
-    - artifacts\data_preparation\train.csv
-    - artifacts\data_preparation\test.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\data_preparation\train.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\data_preparation\test.csv
 
   data_transformation:
    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_transf.py
    deps:
-    - artifacts\data_cleaning\swiggy_cleaned.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\data_preparation\train.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\data_preparation\test.csv
     - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_transf.py
    outs:
     - artifacts\data_trans\test_trans.csv
@@ -35,6 +35,7 @@ stages:
    deps:
     - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_train.py
     - artifacts\data_trans\train_trans.csv
+    - artifacts\data_trans\test_trans.csv
    params:
     - Random_Forest
     - LightGBM
@@ -55,4 +56,9 @@ stages:
     - LightGBM
    outs:
     - artifacts\model_evaluation\metrics.json
-    
+
+  model_register:
+    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_register.py
+    deps:
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_register.py
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\model_evaluation\metrics.json

@@ -74,5 +74,9 @@ class ModelEvaluationConfig:
     #metric_file_name: Path
     #target_column: str
 
-
-    
+@dataclass(frozen=True)
+class ModelRegisterConfig:
+  dagshu_tracking_uri : Path
+  run_json_info: Path
+  repo_owner: str
+  repo_name: str    

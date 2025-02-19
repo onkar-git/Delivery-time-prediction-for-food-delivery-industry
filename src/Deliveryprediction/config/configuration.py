@@ -6,7 +6,8 @@ from Deliveryprediction.entity.config_entity import (DataIngestionConfig,
                                                      DataPreparationConfig,
                                                      DataTransformerConfig,
                                                      ModelTrainerConfig,
-                                                     ModelEvaluationConfig)
+                                                     ModelEvaluationConfig,
+                                                     ModelRegisterConfig)
 
 
 class ConfigurationManager:
@@ -153,3 +154,18 @@ class ConfigurationManager:
         )
 
         return model_evaluation_config
+    
+    def get_model_registry_config(self) -> ModelRegisterConfig:
+        config = self.config.model_registry    
+
+        #create_directories([config.root_dir])
+
+        model_registry_config = ModelRegisterConfig(
+            dagshu_tracking_uri = config.dagshu_tracking_uri,
+            run_json_info = config.run_json_info,
+            repo_name= config.repo_name,
+            repo_owner= config.repo_owner,
+
+        )
+
+        return model_registry_config
