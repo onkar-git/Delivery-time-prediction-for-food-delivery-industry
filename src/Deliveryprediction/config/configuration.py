@@ -5,7 +5,8 @@ from Deliveryprediction.entity.config_entity import (DataIngestionConfig,
                                                      DataCleaningConfig,
                                                      DataPreparationConfig,
                                                      DataTransformerConfig,
-                                                     ModelTrainerConfig)
+                                                     ModelTrainerConfig,
+                                                     ModelEvaluationConfig)
 
 
 class ConfigurationManager:
@@ -131,3 +132,24 @@ class ConfigurationManager:
             )
 
         return model_trainer_config_lgm
+    
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        params = self.params.LightGBM
+        #schema =  self.schema.TARGET_COLUMN
+
+        create_directories([config.root_dir])
+
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            data_input_dir=config.data_input_dir,
+            model_path = config.model_path,
+            prepro_dir = config.prepro_dir,
+            all_params=params,
+            metric_file = config.metric_file,
+            #target_column = schema.name
+           
+        )
+
+        return model_evaluation_config

@@ -5,7 +5,7 @@ stages:
     - artifacts\data_ingestion\swiggy.csv
     - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\main_dvc.py
     outs:
-    - artifacts\data_cleaning\swiggy_cleaned.csv
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\artifacts\data_cleaning\swiggy_cleaned.csv
     
 
   data_preparation:
@@ -43,4 +43,16 @@ stages:
     - artifacts\model_trainer\models\power_transformer.joblib
     - artifacts\model_trainer\models\stacking_regressor.joblib
 
-  
+  model_evaluation:
+   cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_eval.py
+   deps:
+    - E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_eval.py
+    - artifacts\data_trans\train_trans.csv
+    - artifacts\data_trans\test_trans.csv
+    - artifacts\model_trainer\models\model.joblib
+   params:
+    - Random_Forest
+    - LightGBM
+   outs:
+    - artifacts\model_evaluation\metrics.json
+    

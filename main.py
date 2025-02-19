@@ -6,6 +6,7 @@ from Deliveryprediction.pipeline.stage_03_data_cleaning import DataCleaningPipel
 from Deliveryprediction.pipeline.stage_04_data_preparation import DataPreparationTrainingPipeline
 from Deliveryprediction.pipeline.stage_05_data_transformation import DataTransformerTrainingPipeline
 from Deliveryprediction.pipeline.stage_06_model_traning import ModelTrainerTrainingPipeline
+from Deliveryprediction.pipeline.stage_07_model_evaluation import ModelEvaluationTrainingPipeline
 from pathlib import Path
 
 STAGE_NAME = "Data Ingestion Stage"
@@ -75,6 +76,16 @@ try:
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
    model_train = ModelTrainerTrainingPipeline()
    model_train.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
+
+STAGE_NAME = "Model Evaluation Stage"
+try:
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+   model_eval = ModelEvaluationTrainingPipeline()
+   model_eval.main()
    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
         logger.exception(e)

@@ -1,7 +1,8 @@
 schema: '2.0'
 stages:
   data_cleaning:
-    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\main_dvc.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\main_dvc.py
     deps:
     - path: artifacts\data_ingestion\swiggy.csv
       hash: md5
@@ -17,7 +18,8 @@ stages:
       md5: f8c60641d9cd7e3e6bf30c1494ad6df7
       size: 3851746
   data_preparation:
-    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_prep.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_prep.py
     deps:
     - path: artifacts\data_cleaning\swiggy_cleaned.csv
       hash: md5
@@ -41,7 +43,8 @@ stages:
       md5: 8c76f5d21e065dc82670efd10853e397
       size: 2886772
   data_transformation:
-    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_transf.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\data_transf.py
     deps:
     - path: artifacts\data_cleaning\swiggy_cleaned.csv
       hash: md5
@@ -65,7 +68,8 @@ stages:
       md5: 8c43983e0b925ac07685c1162d9d8fd8
       size: 4063875
   model_train:
-    cmd: python E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_train.py
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_train.py
     deps:
     - path: artifacts\data_trans\train_trans.csv
       hash: md5
@@ -109,3 +113,44 @@ stages:
       hash: md5
       md5: 5598cb4df6be58ee3e393e8e6f4c5f20
       size: 149503466
+  model_evaluation:
+    cmd: python 
+      E:\projects\Delivery-time-prediction-for-food-devlivery-industry\dvc_main\model_eval.py
+    deps:
+    - path: artifacts\data_trans\test_trans.csv
+      hash: md5
+      md5: 9662a890b32e04f6679b3c3c372e6744
+      size: 1354858
+    - path: artifacts\data_trans\train_trans.csv
+      hash: md5
+      md5: 8c43983e0b925ac07685c1162d9d8fd8
+      size: 4063875
+    - path: artifacts\model_trainer\models\model.joblib
+      hash: md5
+      md5: ca5936dd8355670567fd467ec5aedbd6
+      size: 149515016
+    - path: dvc_main\model_eval.py
+      hash: md5
+      md5: 984bfb0d4667c08e49db7fe3925bf84e
+      size: 1064
+    params:
+      params.yaml:
+        LightGBM:
+          n_estimators: 154
+          max_depth: 27
+          learning_rate: 0.22234435854395157
+          subsample: 0.7592213724048168
+          min_child_weight: 20
+          min_split_gain: 0.004604680609280751
+          reg_lambda: 97.81002379097947
+          n_jobs: -1
+        Random_Forest:
+          n_estimators: 479
+          criterion: squared_error
+          max_depth: 17
+          max_features: 1
+          min_samples_split: 9
+          min_samples_leaf: 2
+          max_samples: 0.6603673526197066
+          verbose: 1
+          n_jobs: -1

@@ -62,3 +62,17 @@ class ModelTrainerConfig:
     max_samples_rf: float
     verbose_rf: int
     n_jobs_rf: int
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    data_input_dir:Path
+    model_path: Path
+    metric_file: Path
+    all_params: dict
+    prepro_dir: Path
+    #metric_file_name: Path
+    #target_column: str
+
+
+    
