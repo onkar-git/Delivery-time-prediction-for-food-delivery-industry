@@ -1,5 +1,5 @@
 PARAMS:
-  test_size: 0.20
+  test_size: 0.22
   random_state: 38
 
 Random_Forest:

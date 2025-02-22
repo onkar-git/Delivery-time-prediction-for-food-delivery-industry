@@ -9,17 +9,17 @@ echo "Pulling Docker image..."
 docker pull 650251684767.dkr.ecr.us-east-1.amazonaws.com/delivery_time:latest
 
 echo "Checking for existing container..."
-if [ "$(docker ps -q -f name=delivery_time_pred)" ]; then
+if [ "$(docker ps -q -f name=delivery_time)" ]; then
     echo "Stopping existing container..."
-    docker stop delivery_time_pred
+    docker stop delivery_time
 fi
 
-if [ "$(docker ps -aq -f name=delivery_time_pred)" ]; then
+if [ "$(docker ps -aq -f name=delivery_time)" ]; then
     echo "Removing existing container..."
-    docker rm delivery_time_pred
+    docker rm delivery_time
 fi
 
 echo "Starting new container..."
-docker run -d -p 80:8000 --name delivery_time_pred -e DAGSHUB_TOKEN=a131814566b9dd9187d50514caafd7f751b63df4 650251684767.dkr.ecr.us-east-1.amazonaws.com/delivery_time:latest
+docker run -d -p 80:8000 --name delivery_time -e DAGSHUB_TOKEN=a131814566b9dd9187d50514caafd7f751b63df4 650251684767.dkr.ecr.us-east-1.amazonaws.com/delivery_time:latest
 
 echo "Container started successfully."

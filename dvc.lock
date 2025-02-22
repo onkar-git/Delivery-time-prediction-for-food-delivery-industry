@@ -30,27 +30,27 @@ stages:
     params:
       params.yaml:
         PARAMS.random_state: 38
-        PARAMS.test_size: 0.2
+        PARAMS.test_size: 0.22
     outs:
     - path: artifacts/data_preparation/test.csv
       hash: md5
-      md5: c3300f257bbfd57ea956e00f3c5b165e
-      size: 769267
+      md5: 479a2363670e25e45b4d3fa25cb36e86
+      size: 846483
     - path: artifacts/data_preparation/train.csv
       hash: md5
-      md5: a43feaeaccae1287543626bf692d759f
-      size: 3079832
+      md5: 4c70e3f2f20daf908e750f29ede9b706
+      size: 3002616
   data_transformation:
     cmd: python dvc_main/data_transf.py
     deps:
     - path: artifacts/data_preparation/test.csv
       hash: md5
-      md5: c3300f257bbfd57ea956e00f3c5b165e
-      size: 769267
+      md5: 479a2363670e25e45b4d3fa25cb36e86
+      size: 846483
     - path: artifacts/data_preparation/train.csv
       hash: md5
-      md5: a43feaeaccae1287543626bf692d759f
-      size: 3079832
+      md5: 4c70e3f2f20daf908e750f29ede9b706
+      size: 3002616
     - path: dvc_main/data_transf.py
       hash: md5
       md5: ce0380eb830d60fc745c6f5ab21df169
@@ -58,27 +58,27 @@ stages:
     outs:
     - path: artifacts/data_trans/models/preprocessor.joblib
       hash: md5
-      md5: 96866d922b22072e2ef9b27974e6b25e
+      md5: 7c866eec1082e1b80f7eb84b80176380
       size: 8493
     - path: artifacts/data_trans/test_trans.csv
       hash: md5
-      md5: 58effed2cdfa64edae899fdadfe9f017
-      size: 1084613
+      md5: efb4f41e1d24712a8421c72089790128
+      size: 1193047
     - path: artifacts/data_trans/train_trans.csv
       hash: md5
-      md5: a306a1a126fb9de20ca4390d0bc1ddaf
-      size: 4334120
+      md5: 1eb7c5831d442a48776dcb12deffc79e
+      size: 4225686
   model_train:
     cmd: python dvc_main/model_train.py
     deps:
     - path: artifacts/data_trans/test_trans.csv
       hash: md5
-      md5: 58effed2cdfa64edae899fdadfe9f017
-      size: 1084613
+      md5: efb4f41e1d24712a8421c72089790128
+      size: 1193047
     - path: artifacts/data_trans/train_trans.csv
       hash: md5
-      md5: a306a1a126fb9de20ca4390d0bc1ddaf
-      size: 4334120
+      md5: 1eb7c5831d442a48776dcb12deffc79e
+      size: 4225686
     - path: dvc_main/model_train.py
       hash: md5
       md5: 9728b1d64c4095b3154579f5a27473dd
@@ -107,31 +107,31 @@ stages:
     outs:
     - path: artifacts/model_trainer/models/model.joblib
       hash: md5
-      md5: 36d87055dadac22f4747909d45992a46
-      size: 157380840
+      md5: 139f7a0c33d8826ad51bda9f3edae5d3
+      size: 154730792
     - path: artifacts/model_trainer/models/power_transformer.joblib
       hash: md5
-      md5: 56e1fba1397a506cbec4daaddc0432ef
+      md5: 6e742d2091bc044d286f18a26dab59d1
       size: 837
     - path: artifacts/model_trainer/models/stacking_regressor.joblib
       hash: md5
-      md5: e6ebbe3c4b2b85ccba06e0b16965f8e5
-      size: 157369290
+      md5: 967fabc8fb68f4778fa1a32826feeeca
+      size: 154719242
   model_evaluation:
     cmd: python dvc_main/model_eval.py
     deps:
     - path: artifacts/data_trans/test_trans.csv
       hash: md5
-      md5: 58effed2cdfa64edae899fdadfe9f017
-      size: 1084613
+      md5: efb4f41e1d24712a8421c72089790128
+      size: 1193047
     - path: artifacts/data_trans/train_trans.csv
       hash: md5
-      md5: a306a1a126fb9de20ca4390d0bc1ddaf
-      size: 4334120
+      md5: 1eb7c5831d442a48776dcb12deffc79e
+      size: 4225686
     - path: artifacts/model_trainer/models/model.joblib
       hash: md5
-      md5: 36d87055dadac22f4747909d45992a46
-      size: 157380840
+      md5: 139f7a0c33d8826ad51bda9f3edae5d3
+      size: 154730792
     - path: dvc_main/model_eval.py
       hash: md5
       md5: 0716db37b22979f661ecf118a884cc67
@@ -160,7 +160,7 @@ stages:
     outs:
     - path: artifacts/model_evaluation/metrics.json
       hash: md5
-      md5: f2ba4fa3be81a4749a16315465b21de0
+      md5: 128544e5b16c8217383d5dea12602954
       size: 220
   Model_register:
     cmd: 
@@ -179,7 +179,7 @@ stages:
     deps:
     - path: artifacts/model_evaluation/metrics.json
       hash: md5
-      md5: f2ba4fa3be81a4749a16315465b21de0
+      md5: 128544e5b16c8217383d5dea12602954
       size: 220
     - path: dvc_main/model_register.py
       hash: md5

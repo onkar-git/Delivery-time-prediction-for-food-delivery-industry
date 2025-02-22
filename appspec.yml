@@ -9,6 +9,6 @@ hooks:
       timeout: 300
       runas: ubuntu
   ApplicationStart:
-    - location: deploy/scripts/start_docker.shgit status
+    - location: deploy/scripts/start_docker.sh
       timeout: 300
       runas: ubuntu
