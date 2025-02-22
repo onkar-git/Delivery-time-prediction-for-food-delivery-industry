@@ -10,25 +10,37 @@ from mlflow import MlflowClient
 from sklearn import set_config
 from pathlib import Path
 #from scripts.data_clean_utils import perform_data_cleaning
-from Deliveryprediction.utils.pred_data_clean import perform_data_cleaning
+from src.Deliveryprediction.utils.pred_data_clean import perform_data_cleaning
 #from Deliveryprediction.components._3_data_cleaning import DataCleaning
-from Deliveryprediction import logger
 
 # set the output as pandas
 set_config(transform_output='pandas')
 
 # initialize dagshub
-import dagshub
-import mlflow.client
-import nest_asyncio
-import uvicorn
+# import dagshub
+# import mlflow.client
 
+# dagshub.init(repo_owner='onkar-git', 
+#              repo_name='Delivery-time-prediction-for-food-delivery-industry', 
+#              mlflow=True)
+import os
 
-dagshub.init(repo_owner='onkar-git', 
-             repo_name='Delivery-time-prediction-for-food-delivery-indust', 
-             mlflow=True)
+# Get the DagsHub token from the environment variable
+dagshub_token = os.getenv('DAGSHUB_TOKEN')
 
+# Use the token for authentication
+if dagshub_token:
+    # Example: Use the token to authenticate with DagsHub API
+    # (This is just a placeholder; replace with actual API call)
+    print("Authenticated with DagsHub using token.")
+else:
+    print("DAGSHUB_TOKEN is not set.")
 # set the mlflow tracking server
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
+dagshub_url = "https://dagshub.com"
+
 mlflow.set_tracking_uri("https://dagshub.com/onkar-git/Delivery-time-prediction-for-food-delivery-industry.mlflow")
 
 
@@ -88,11 +100,11 @@ ordinal_cat_cols = ["traffic","distance_type"]
 client = MlflowClient()
 
 # load the model info to get the model name
-model_file_path = "artifacts\model_evaluation\metrics.json"
+model_file_path = "artifacts/model_evaluation/metrics.json"
 model_name = load_model_information(model_file_path)["model_name"]
 
 # stage of the model
-stage = "Staging"
+stage = "Production"
 
 # get the latest model version
 # latest_model_ver = client.get_latest_versions(name=model_name,stages=[stage])
@@ -156,4 +168,5 @@ def do_predictions(data: Data):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app="app:app")
+    uvicorn.run(app="app:app",host="0.0.0.0",port=8000)
+   
