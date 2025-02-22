@@ -1,6 +1,6 @@
 PARAMS:
   test_size: 0.22
-  random_state: 38
+  random_state: 45
 
 Random_Forest:
   n_estimators: 479
