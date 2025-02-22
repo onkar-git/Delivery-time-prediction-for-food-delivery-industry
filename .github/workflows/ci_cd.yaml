@@ -93,9 +93,9 @@ jobs:
             aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws deploy create-deployment \
-            --application-name complete-delivery-application \
+            --application-name CD-delivery-time-Latest \
             --deployment-config-name CodeDeployDefault.OneAtATime \
-            --deployment-group-name application-delivery-deployment-group \
+            --deployment-group-name deliveryprectiondeploymentgroup \
             --s3-location bucket=deliverytimedeployment,key=deployment.zip,bundleType=zip \
             --file-exists-behavior OVERWRITE \
             --region us-east-1
