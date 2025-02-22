@@ -29,28 +29,28 @@ stages:
       size: 1347
     params:
       params.yaml:
-        PARAMS.random_state: 42
+        PARAMS.random_state: 40
         PARAMS.test_size: 0.2
     outs:
     - path: artifacts/data_preparation/test.csv
       hash: md5
-      md5: f052b1e6bf1657c3a6d7221e464db7b2
-      size: 769585
+      md5: de2cdbc401da28f3f018000b85f1a08d
+      size: 769348
     - path: artifacts/data_preparation/train.csv
       hash: md5
-      md5: a817b62d6d6fc672abb5187a6e3befa0
-      size: 3079514
+      md5: d218920f47fcbec032452504bfec6ee2
+      size: 3079751
   data_transformation:
     cmd: python dvc_main/data_transf.py
     deps:
     - path: artifacts/data_preparation/test.csv
       hash: md5
-      md5: f052b1e6bf1657c3a6d7221e464db7b2
-      size: 769585
+      md5: de2cdbc401da28f3f018000b85f1a08d
+      size: 769348
     - path: artifacts/data_preparation/train.csv
       hash: md5
-      md5: a817b62d6d6fc672abb5187a6e3befa0
-      size: 3079514
+      md5: d218920f47fcbec032452504bfec6ee2
+      size: 3079751
     - path: dvc_main/data_transf.py
       hash: md5
       md5: ce0380eb830d60fc745c6f5ab21df169
@@ -62,23 +62,23 @@ stages:
       size: 8493
     - path: artifacts/data_trans/test_trans.csv
       hash: md5
-      md5: 30760eb970352e9bbc750b28f381597f
-      size: 1084276
+      md5: 195c04f9622d14a415975bdd634983f9
+      size: 1084327
     - path: artifacts/data_trans/train_trans.csv
       hash: md5
-      md5: 8eca4e53249a38442f903a60c8ee866a
-      size: 4334457
+      md5: 17ea170b6f1b8319dd26c58203f32377
+      size: 4334406
   model_train:
     cmd: python dvc_main/model_train.py
     deps:
     - path: artifacts/data_trans/test_trans.csv
       hash: md5
-      md5: 30760eb970352e9bbc750b28f381597f
-      size: 1084276
+      md5: 195c04f9622d14a415975bdd634983f9
+      size: 1084327
     - path: artifacts/data_trans/train_trans.csv
       hash: md5
-      md5: 8eca4e53249a38442f903a60c8ee866a
-      size: 4334457
+      md5: 17ea170b6f1b8319dd26c58203f32377
+      size: 4334406
     - path: dvc_main/model_train.py
       hash: md5
       md5: 9728b1d64c4095b3154579f5a27473dd
@@ -107,31 +107,31 @@ stages:
     outs:
     - path: artifacts/model_trainer/models/model.joblib
       hash: md5
-      md5: d5a3b6abdce54dcdb1ab82e695a47037
-      size: 157884312
+      md5: c7be24bad4b853035183d191888f8d0a
+      size: 157264600
     - path: artifacts/model_trainer/models/power_transformer.joblib
       hash: md5
-      md5: 100561b80a7815cf57bf07e59612b67a
+      md5: 13ca02e9f9946d360f0046378aad17dd
       size: 837
     - path: artifacts/model_trainer/models/stacking_regressor.joblib
       hash: md5
-      md5: 515275c29424d66ce83199fef88b014e
-      size: 157872762
+      md5: 98e46a71b451e37c70cf8db1ea6e2725
+      size: 157253050
   model_evaluation:
     cmd: python dvc_main/model_eval.py
     deps:
     - path: artifacts/data_trans/test_trans.csv
       hash: md5
-      md5: 30760eb970352e9bbc750b28f381597f
-      size: 1084276
+      md5: 195c04f9622d14a415975bdd634983f9
+      size: 1084327
     - path: artifacts/data_trans/train_trans.csv
       hash: md5
-      md5: 8eca4e53249a38442f903a60c8ee866a
-      size: 4334457
+      md5: 17ea170b6f1b8319dd26c58203f32377
+      size: 4334406
     - path: artifacts/model_trainer/models/model.joblib
       hash: md5
-      md5: d5a3b6abdce54dcdb1ab82e695a47037
-      size: 157884312
+      md5: c7be24bad4b853035183d191888f8d0a
+      size: 157264600
     - path: dvc_main/model_eval.py
       hash: md5
       md5: 0716db37b22979f661ecf118a884cc67
@@ -160,7 +160,7 @@ stages:
     outs:
     - path: artifacts/model_evaluation/metrics.json
       hash: md5
-      md5: 8878af9fdb9ed4176725e11977319aa9
+      md5: ce9aa00b081f4e108715688d93cb3e4d
       size: 220
   Model_register:
     cmd: 
@@ -179,7 +179,7 @@ stages:
     deps:
     - path: artifacts/model_evaluation/metrics.json
       hash: md5
-      md5: 8878af9fdb9ed4176725e11977319aa9
+      md5: ce9aa00b081f4e108715688d93cb3e4d
       size: 220
     - path: dvc_main/model_register.py
       hash: md5
